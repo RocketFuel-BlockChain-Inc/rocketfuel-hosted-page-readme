@@ -1,0 +1,255 @@
+  
+
+# RocketFuel Hosted Page
+
+  
+
+Follow the guide to embed RocketFuel Hosted Page on the Merchant's website.
+
+  
+
+  
+
+# Prerequistes:-
+
+  
+
+Merchant should send below JSON input details to display the same on RocketFuel hosted page
+
+  
+
+    Sample Format of JSON Data-
+    {
+	    amount: "11.00",
+	    merchant_id: process.env.MERCHANT_ID,
+	    cart: [
+	    {
+		    id: "23",
+		    name: "Album",
+		    price: "11",
+		    quantity: "1",
+	    },
+	    ],
+		 currency: "USD",
+	    order: "390",
+	    redirectUrl: "",
+    }
+
+  
+
+where
+
+  
+
+1. Amount - total price of whole order for payment, in USD only
+2. Cart -
+	a. ID - Article unique Id
+	b. Name - Article Name
+	c. Price - Article price
+	d. Quantity - Article Quantity
+3. Currency - Currency in which Merchant recieved the payment, in USD only
+4. Order - Unique Order Id
+5. RedirectUrl - URL of the Merchant site where the Merchant wants to redirect from the Hosted page to their site after payment.
+
+  
+
+### Follow the steps below :-
+
+  
+
+1. Merchant need to be authenticated on RocketFuel by passing the input parameters - MERCHANT_EMAIL and MERCHANT_PASSWORD.
+
+  
+
+**Request**
+
+
+    var options = {
+    	method: "POST",
+    	url: process.env.API_ENDPOINT + "auth/login",
+	    headers: {
+		    "Content-Type": "application/json",
+	    },
+	    body: JSON.stringify({
+		    email: process.env.MERCHANT_EMAIL,
+		    password: process.env.MERCHANT_PASS,
+	    }),
+    };
+
+  
+
+  
+
+**Response**
+
+  
+
+  
+
+    { "ok":true, "result"{ "access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImViMDE1NWU4 LTkwNzItNGMyYi05NWFjLTAxZDhiMWFlZDI3ZCIsImlhdCI6MTYyMzQwMz g0OSwiZXhwIjoxNjIzNDkwMjQ5fQ.t1wL6LYkr8y5sauCuOWMmGbGNDZH qXzUjo6WeT370c","refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZC I6ImViMDE1NWU4LTkwNzItNGMyYi05NWFjLTAxZDhiMWFlZDI3ZCIsImlhd CI6MTYyMzQwMzg0OSwiZXhwIjoxNjI1OTk1ODQ5fQ.A_JF1ODtcRCRc7Yn TcT5JBFDDMkgQtlQXYkhBFw3dgM", "status":2 }
+
+  
+  
+
+2. Once Merchant is verified, details of the items purchased with the access token will be sent in a different request.
+
+Note - Token needs to send in the Header and details of the items purchased in the Body.
+
+  
+
+**Request**
+
+  
+
+    var options = {
+	    method: "POST",
+	    url: process.env.API_ENDPOINT + "hosted-page",
+	    headers: {
+		    authorization: "Bearer " + accessToken,
+		    "Content-Type": "application/json",
+	    },
+	    body: JSON.stringify({
+	    amount: "11.00",
+	    merchant_id: process.env.MERCHANT_ID,
+	    cart: [
+	    {
+		    id: "23",
+		    name: "Album",
+		    price: "11",
+		    quantity: "1",
+	    },
+	    ],
+	    currency: "USD",
+	    order: "390",
+	    redirectUrl: "",
+	    }),
+    };
+
+  
+
+**Response** -
+
+  
+
+    {
+	    "ok":true,
+	    "result":{"url":"[https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-](https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-)[f5cf95b5d504](https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-f5cf95b5d504)"}
+    
+    }
+3. Once Merchant received the response as a True, then send the UUID as the response  to  the Merchant site.
+
+  
+
+  
+
+***On click of [Pay for your order with RocketFuel] paste below Code Snippet.***
+
+  
+
+**Code Snippet--**
+
+  
+
+  
+
+    const request=require('request');
+    var options = {
+    
+	    method: "POST",
+	    url: process.env.API_ENDPOINT + "auth/login",
+	    headers: {
+	    "Content-Type": "application/json",
+	    },
+	    body: JSON.stringify({
+		    email: process.env.MERCHANT_EMAIL,
+		    password: process.env.MERCHANT_PASS,
+	    }),
+    };
+    
+    request(options, function (error, response) {
+    
+	    if (error) throw new Error(error);    
+	    let accessToken = JSON.parse(response.body).result.access;
+    
+	    //place the order API Call
+	    var options = {
+		    method: "POST",
+		    url: process.env.API_ENDPOINT + "hosted-page",
+		    headers: {
+			    authorization: "Bearer " + accessToken,
+			    "Content-Type": "application/const  uuidInfo = JSON.parse(result);
+if(uuidInfo.error !== undefined){
+alert("Order placement failed");
+return  false;
+}
+uuid = uuidInfo.uuid;
+rkfl = new  RocketFuel({
+	uuid,
+	callback:  callBackFunc,
+	environment:  "<%= developmentEnv %>"
+});
+json",
+		    },
+		    body: JSON.stringify({
+		    amount: "11.00",
+		    merchant_id: process.env.MERCHANT_ID,
+		    cart: [
+		    {
+			    id: "23",
+			    name: "Album",
+			    price: "11",
+			    quantity: "1",
+			   },
+		   ],
+		    currency: "USD",
+		    order: "390",
+		    redirectUrl: "",
+    }),
+    };
+    
+      
+    
+    request(options, function (error, response) {
+    
+	    if (error) throw new Error(error);
+	    let resp = JSON.parse(response.body);
+	    if(resp.result !== undefined && resp.result.url !== undefined){
+			let  urlArr = resp.result.url.split("/");
+			let  uuid = urlArr[urlArr.length - 1];
+			res.status(200).send({ uuid:  uuid });
+		}else{
+			res.status(400).send({ error:  "Failed to place order" });
+			}
+		 });
+    });
+
+# Wrapper Script Implementation
+1. Add the following script to the Merchant site.
+ 	
+
+	    script-- src="rkfl.js"
+
+2.	Once we get the response with the uuid. We will initialise an object of the above included script, while initialising the object we will pass the uuid ,callback function, environment.
+
+		const  uuidInfo = JSON.parse(result);
+		if(uuidInfo.error !== undefined){
+		alert("Order placement failed");
+		return  false;
+		}
+		uuid = uuidInfo.uuid;
+		rkfl = new  RocketFuel({
+			uuid,
+			callback:  callBackFunc,
+			environment:  "<%= developmentEnv %>"
+		});
+
+3.	After initialising the object start the payment by calling the initPayment method of the above script.
+	
+
+		function  startPayment(){
+			rkfl.initPayment();
+		}
+
+
+
+
