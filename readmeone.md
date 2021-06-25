@@ -186,7 +186,7 @@ Note - Token needs to send in the Header and details of the items purchased in t
 		    url: process.env.API_ENDPOINT + "hosted-page",
 		    headers: {
 			    authorization: "Bearer " + accessToken,
-			    "Content-Type": "application/const 
+			    "Content-Type": "application/const" 
 			    } 
 		    },
 		    body: JSON.stringify({
