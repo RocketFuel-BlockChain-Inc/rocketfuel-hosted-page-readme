@@ -86,7 +86,13 @@ where
 
   
 
-    { "ok":true, "result"{ "access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImViMDE1NWU4 LTkwNzItNGMyYi05NWFjLTAxZDhiMWFlZDI3ZCIsImlhdCI6MTYyMzQwMz g0OSwiZXhwIjoxNjIzNDkwMjQ5fQ.t1wL6LYkr8y5sauCuOWMmGbGNDZH qXzUjo6WeT370c","refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZC I6ImViMDE1NWU4LTkwNzItNGMyYi05NWFjLTAxZDhiMWFlZDI3ZCIsImlhd CI6MTYyMzQwMzg0OSwiZXhwIjoxNjI1OTk1ODQ5fQ.A_JF1ODtcRCRc7Yn TcT5JBFDDMkgQtlQXYkhBFw3dgM", "status":2 }
+    { "ok":true, "result"{ "access":"eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp
+    XVCJ9.eyJpZCI6ImViMDE1NWU4 LTkwNzItNGMyYi05NWFjLTAxZDhiMWFlZDI3ZC
+    IsImlhdCI6MTYyMzQwMz g0OSwiZXhwIjoxNjIzNDkwMjQ5fQ.t1wL6LYkr8y5sau
+    CuOWMmGbGNDZH qXzUjo6WeT370c","refresh":"eyJhbGciOiJIUzI1NiIsInR5
+    cCI6IkpXVCJ9.eyJpZC I6ImViMDE1NWU4LTkwNzItNGMyYi05NWFjLTAxZDhiMWF
+    lZDI3ZCIsImlhd CI6MTYyMzQwMzg0OSwiZXhwIjoxNjI1OTk1ODQ5fQ.A_JF1ODt
+    cRCRc7Yn TcT5JBFDDMkgQtlQXYkhBFw3dgM", "status":2 }
 
   
   
@@ -133,7 +139,10 @@ Note - Token needs to send in the Header and details of the items purchased in t
 
     {
 	    "ok":true,
-	    "result":{"url":"[https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-](https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-)[f5cf95b5d504](https://dev.rocketdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-f5cf95b5d504)"}
+	    "result":{"url":"[https://dev.rocketdemo.net/hostedPage
+	    /f7cb4141-3030-4245-8aa1-](https://dev.rocketdemo.net/hostedP
+	    age/f7cb4141-3030-4245-8aa1-)[f5cf95b5d504](https://dev.rocke
+	    tdemo.net/hostedPage/f7cb4141-3030-4245-8aa1-f5cf95b5d504)"}
     
     }
 3. Once Merchant received the response as a True, then send the UUID as the response  to  the Merchant site.
@@ -177,18 +186,8 @@ Note - Token needs to send in the Header and details of the items purchased in t
 		    url: process.env.API_ENDPOINT + "hosted-page",
 		    headers: {
 			    authorization: "Bearer " + accessToken,
-			    "Content-Type": "application/const  uuidInfo = JSON.parse(result);
-if(uuidInfo.error !== undefined){
-alert("Order placement failed");
-return  false;
-}
-uuid = uuidInfo.uuid;
-rkfl = new  RocketFuel({
-	uuid,
-	callback:  callBackFunc,
-	environment:  "<%= developmentEnv %>"
-});
-json",
+			    "Content-Type": "application/const 
+			    } 
 		    },
 		    body: JSON.stringify({
 		    amount: "11.00",
@@ -213,7 +212,7 @@ json",
     
 	    if (error) throw new Error(error);
 	    let resp = JSON.parse(response.body);
-	    if(resp.result !== undefined && resp.result.url !== undefined){
+	    if(resp.result !== undefined && resp.result.url !==undefined){
 			let  urlArr = resp.result.url.split("/");
 			let  uuid = urlArr[urlArr.length - 1];
 			res.status(200).send({ uuid:  uuid });
@@ -223,13 +222,15 @@ json",
 		 });
     });
 
-# Wrapper Script Implementation
-1. Add the following script to the Merchant site.
- 	
+4. **Wrapper Script Implementation**
+		4.1. Add the following script to the Merchant site.
+				
 
-	    script-- src="rkfl.js"
+		script-- src="rkfl.js"
 
-2.	Once we get the response with the uuid. We will initialise an object of the above included script, while initialising the object we will pass the uuid ,callback function, environment.
+	4.2	Once we get the response with the uuid. We will initialise an object 				of the above included script, while initialising the object we will pass the uuid ,callback function, environment.
+
+		
 
 		const  uuidInfo = JSON.parse(result);
 		if(uuidInfo.error !== undefined){
@@ -243,12 +244,14 @@ json",
 			environment:  "<%= developmentEnv %>"
 		});
 
-3.	After initialising the object start the payment by calling the initPayment method of the above script.
+	4.3.	After initialising the object start the payment by calling the initPayment method of the above script.
 	
 
 		function  startPayment(){
 			rkfl.initPayment();
 		}
+
+
 
 
 
