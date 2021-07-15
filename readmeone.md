@@ -1,3 +1,4 @@
+
   
 
 # RocketFuel JS SDK Page
@@ -221,9 +222,9 @@ Note - Token needs to send in the Header and details of the items purchased in t
 			}
 		 });
     });
-
 4. **Wrapper Script Implementation**
-		4.1. Add the following script to the Merchant site.  CDN (https://d3rpjm0wf8u2co.cloudfront.net/static/rkfl.js)
+		4.1. Add the following script to the Merchant site.  
+		CDN (https://d3rpjm0wf8u2co.cloudfront.net/static/rkfl.js)
 				
 
 		script-- src="rkfl.js"
@@ -241,9 +242,9 @@ Note - Token needs to send in the Header and details of the items purchased in t
 		rkfl = new  RocketFuel({
 			uuid,
 			callback:  callBackFunc,
-			environment:  "<%= developmentEnv %>"
+			environment:  "<%= developmentEnv %>"  // prod, preprod
 		});
-
+	
 	4.3.	After initialising the object start the payment by calling the initPayment method of the above script.
 	
 
