@@ -1,6 +1,6 @@
   
 
-# RocketFuel Hosted Page
+# RocketFuel JS SDK Page
 
   
 
@@ -244,18 +244,9 @@ Note - Token needs to send in the Header and details of the items purchased in t
 			environment:  "<%= developmentEnv %>"
 		});
 
-	environment values are as follows:-
-		4.2.1 prod
-		4.2.1 preprod
 	4.3.	After initialising the object start the payment by calling the initPayment method of the above script.
 	
 
 		function  startPayment(){
 			rkfl.initPayment();
 		}
-
-	
-
-
-
-
