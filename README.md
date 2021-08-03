@@ -8,7 +8,9 @@
 Follow the guide to embed RocketFuel Hosted Page on the Merchant's website.
 
   
-
+### API Endpoints are as follows:-
+1. prod: `https://app.rocketfuelblockchain.com/api`,
+2. preprod: `https://preprod-app.rocketdemo.net/api`,
   
 
 # Prerequistes:-
