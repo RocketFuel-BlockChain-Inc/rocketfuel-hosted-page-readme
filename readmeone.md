@@ -223,6 +223,7 @@ Note - Token needs to send in the Header and details of the items purchased in t
 		 });
     });
 4. **Wrapper Script Implementation**
+
 		4.1. Add the following script to the Merchant site.  
 		CDN (https://d3rpjm0wf8u2co.cloudfront.net/static/rkfl.js)
 				
@@ -251,3 +252,39 @@ Note - Token needs to send in the Header and details of the items purchased in t
 		function  startPayment(){
 			rkfl.initPayment();
 		}
+
+    4.4. Callback payload
+	 
+	   4.4.1 In case of Bank/Exchange payment
+	      {
+            paymentMode: 'Bank/Exchange',
+            txn_id: 
+            status: 
+            meta:
+          },
+
+		  Sample response:
+		  {
+            paymentMode: 'Bank/Exchange',
+            txn_id: "7df55d22-fa5e-4ca2-9af4-a39c95f18b3a"
+            status: 0
+            meta: {offerId: "1630402767550"}
+          },
+		 
+
+
+	   4.4.2 In case of Wallet payment
+	      {
+            paymentMode: 'Wallet',
+            status: 
+            recievedAmount:
+            currency:
+          },
+
+           Sample response:
+		   {
+			   paymentMode: 'Wallet',
+			   status:"completed",
+			   recievedAmount:10.00,
+			   currency:"ETH"
+		   }
